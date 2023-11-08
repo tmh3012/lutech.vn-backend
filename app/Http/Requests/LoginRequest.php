@@ -32,7 +32,6 @@ class LoginRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::exists('users', 'email')
             ],
             'password' => [
                 'required',
