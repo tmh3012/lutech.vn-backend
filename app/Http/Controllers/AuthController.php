@@ -25,7 +25,7 @@ class AuthController extends Controller
             DB::commit();
             return $this->successResponse([
                 'user' => $user,
-                'token' => $user->createToken('API Token')->plainTextToken
+                'tokenAPI' => $user->createToken('API Token')->plainTextToken
             ]);
         } catch (\Throwable $e) {
             DB::rollBack();
@@ -38,17 +38,18 @@ class AuthController extends Controller
         $credentials = $request->validated();
         $remember = $request->get('remember');
         if(! Auth::attempt($credentials, isset($remember))) {
-            return $this->errorResponse('Invalid credentials');
+            return $this->errorResponse('Invalid credentials: Email or password is incorrect');
         }
         $user = Auth::user();
         return $this->successResponse([
             'user' => $user,
-            'token' => $user->createToken('API Token')->plainTextToken,
+            'tokenAPI' => $user->createToken('API Token')->plainTextToken,
         ]);
     }
 
     public function logout(Request $request): JsonResponse
     {
-        return response()->json('logout api');
+        $request->user()->currentAccessToken()->delete();
+        return $this->successResponse([]);
     }
 }
