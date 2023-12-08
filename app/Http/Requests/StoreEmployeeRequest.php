@@ -3,15 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Enums\UserRolesEnum;
-use App\Http\Controllers\ResponseTrait;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class StoreEmployeeRequest extends FormRequest
 {
-    use ResponseTrait;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -45,14 +41,24 @@ class RegisterRequest extends FormRequest
             'role' => [
                 'nullable',
                 Rule::in(UserRolesEnum::getValues())
-            ]
+            ],
+            'gender' => [
+                'required',
+                'boolean',
+            ],
+            'avatar' => [
+                'nullable',
+                'string',
+            ],
+            'position_id' => [
+                'nullable',
+                'exists:positions,id',
+                'alpha_num:ascii',
+            ],
+            'team' => [
+                'nullable',
+                'array',
+            ],
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        $errors = $validator->errors();
-        $response = $this->errorResponse($errors->messages(), null, 422);
-        throw new HttpResponseException($response);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\UserPositionEnum;
+use App\Enums\UserRolesEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,8 +18,7 @@ return new class extends Migration {
                 $table->string('email')->unique();
                 $table->integer('gender')->default(0);
                 $table->string('avatar')->nullable();
-                $table->string('position')->nullable();
-                $table->integer('role')->default(UserPositionEnum::USER);
+                $table->integer('role')->default(UserRolesEnum::USER);
                 $table->string('password');
                 $table->rememberToken();
                 $table->timestamps();
