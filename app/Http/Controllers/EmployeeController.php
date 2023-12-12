@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
+use App\Models\Position;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +20,8 @@ class EmployeeController extends Controller
     }
 
 
-    public function index (Request $request) {
+    public function index (Request $request): JsonResponse
+    {
         $query = $this->model
             ->latest()
             ->paginate()
@@ -30,16 +33,22 @@ class EmployeeController extends Controller
         return response()->json($arr);
     }
 
-    public function store (StoreEmployeeRequest $request) {
+    public function store (StoreEmployeeRequest $request): JsonResponse
+    {
         DB::beginTransaction();
         try {
             $validated = $request->validated();
+            $position = $request->get('position');
+            if(!empty($position)) {
+                $validated['position_id'] = Position::firstOrCreate(['value' => $position])->id;
+            }
             $validated['password'] = Hash::make($validated['password']);
-
+            $user = User::create($validated);
+            DB::commit();
+            return response()->json($user);
         } catch (\Throwable $e) {
-
+            DB::rollBack();
+            return response()->json($e->getMessage());
         }
-
-
     }
 }

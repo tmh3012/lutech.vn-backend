@@ -36,6 +36,7 @@ class StoreEmployeeRequest extends FormRequest
             ],
             'password' => [
                 'required',
+                'confirmed',
                 'min:8'
             ],
             'role' => [
@@ -49,15 +50,6 @@ class StoreEmployeeRequest extends FormRequest
             'avatar' => [
                 'nullable',
                 'string',
-            ],
-            'position_id' => [
-                'nullable',
-                'exists:positions,id',
-                'alpha_num:ascii',
-            ],
-            'team' => [
-                'nullable',
-                'array',
             ],
         ];
     }
