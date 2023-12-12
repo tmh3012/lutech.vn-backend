@@ -14,6 +14,8 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $date=date_create($this->start_date);
+
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,

@@ -28,7 +28,7 @@ class StorePostRequest extends FormRequest
             "job_description" => ['nullable'],
             "job_requirement" => ['nullable'],
             "job_benefit" => ['nullable'],
-            "min_salary" => ['nullable', 'lte:max_salary'],
+            "min_salary" => ['nullable'],
             "max_salary" => ['nullable', 'gte:min_salary'],
             "start_date" => ['nullable', 'date'],
             "end_date" => ['nullable', 'date', 'after:start_date'],

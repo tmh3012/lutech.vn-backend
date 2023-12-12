@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('job_description')->nullable();
             $table->string('job_requirement')->nullable();
             $table->string('job_benefit')->nullable();
-            $table->integer('min_salary')->nullable();
-            $table->integer('max_salary')->nullable();
+            $table->string('min_salary')->nullable();
+            $table->string('max_salary')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('number_applicants')->nullable();
