@@ -23,14 +23,23 @@ class EmployeeController extends Controller
     public function index (Request $request): JsonResponse
     {
         $query = $this->model
+            ->with('position:id,value')
             ->latest()
             ->paginate()
             ->appends($request->all());
 
-        $arr['data'] = $query->getCollection();
+        $arr['employees'] = $query->getCollection();
         $arr['pagination'] = $query->linkCollection();
 
         return response()->json($arr);
+    }
+
+    public function getById(Request $request, $id): JsonResponse
+    {
+        $employees = $this->model
+            ->with('position')
+            ->find($id);
+        return response()->json($employees);
     }
 
     public function store (StoreEmployeeRequest $request): JsonResponse
