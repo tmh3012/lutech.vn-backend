@@ -14,7 +14,7 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $date=date_create($this->start_date);
+        //$date=date_create($this->start_date);
 
         return [
             'id' => $this->id,
@@ -26,7 +26,7 @@ class PostResource extends JsonResource
             "job_benefit" => $this->job_benefit,
             'min_salary' => $this->min_salary,
             'max_salary' => $this->max_salary,
-            'start_date' => $this->start_date,
+            'start_date' => $this->start_date,//date_format($date,"d/m/Y"),
             'end_date' => $this->end_date,
             "number_applicants" => $this->number_applicants,
             "slug" => $this->slug,

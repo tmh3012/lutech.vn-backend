@@ -12,10 +12,10 @@ class Post extends Model
     use HasFactory;
 
     protected $casts = [
-        'start_date' => 'datetime:d-m-Y',
+        'start_date' => 'date:m-d',
     ];
 
-    protected $dateFormat = "d-m-Y";
+    protected $dateFormat = "m-d";
 
     protected $fillable = [
         'user_id',
@@ -36,7 +36,7 @@ class Post extends Model
     protected function startDate(): Attribute
     {
         return Attribute::make(
-          get: fn($value) => Carbon::parse($value)->format('Y-m-d'),
+          get: fn($value) => Carbon::parse($value)->format('d-m-Y'),
         );
     }
 }
