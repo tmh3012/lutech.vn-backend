@@ -12,10 +12,10 @@ class Post extends Model
     use HasFactory;
 
     protected $casts = [
-        'start_date' => 'date:m-d',
+        'start_date' => 'date:Y-m-d',
     ];
 
-    protected $dateFormat = "m-d";
+    protected $dateFormat = "Y-m-d";
 
     protected $fillable = [
         'user_id',
