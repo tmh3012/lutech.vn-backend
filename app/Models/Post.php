@@ -19,7 +19,6 @@ class Post extends Model
 
     protected $fillable = [
         'user_id',
-        'title',
         'job_title',
         "job_description",
         "job_requirement",

@@ -23,7 +23,6 @@ class StorePostRequest extends FormRequest
     {
         return [
             'user_id' => ['required'],
-            'title' => ['required'],
             'job_title' => ['required'],
             "job_description" => ['nullable'],
             "job_requirement" => ['nullable'],
