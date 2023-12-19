@@ -2,10 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -31,7 +33,7 @@ class PostFactory extends Factory
             'start_date' => fake()->date('Y-m-d'),
             'end_date' => fake()->date('Y-m-d'),
             "number_applicants" => fake()->biasedNumberBetween(1, 10),
-            "slug" => fake()->slug,
+            "slug" => SlugService::createSlug(Post::class, 'slug', 'job_title'),
             "site" => fake()->boolean(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
