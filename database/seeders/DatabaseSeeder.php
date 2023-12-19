@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             Post::factory()->create();
             Recruitments::factory()->create();
         }
-        
+
 //        $this->call([
 //            UserSeeder::class,
 //            PostSeeder::class,

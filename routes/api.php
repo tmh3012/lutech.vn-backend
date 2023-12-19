@@ -31,6 +31,20 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/register', [AuthController::class, 'register'])->name('api.register');
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/recruitments', [RecruitmentController::class, 'index']);
+Route::controller(PostController::class)->group(function () {
+    Route::get('/posts', 'index');
+    Route::post('/posts', 'store');
+    Route::get('/posts/{id}', 'show');
+    Route::put('/posts/{id}', 'update');
+    Route::delete('/posts/{id}', 'destroy');
+});
+
+Route::controller(RecruitmentController::class)->group(function () {
+    Route::get('/recruitments', 'index');
+    Route::post('/recruitments', 'store');
+    Route::get('/recruitments/{id}', 'show');
+    Route::put('/recruitments/{id}', 'update');
+    Route::delete('/recruitments/{id}', 'destroy');
+});
+
 Route::get('post/test/{$id}', [PostController::class, 'test']);

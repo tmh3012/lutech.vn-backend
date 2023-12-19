@@ -32,7 +32,7 @@ class StorePostRequest extends FormRequest
             "start_date" => ['nullable', 'date'],
             "end_date" => ['nullable', 'date', 'after:start_date'],
             "number_applicants" => ['nullable'],
-            "slug" => ['required'],
+            "slug" => ['required', 'unique:posts,slug'],
             "site" => ['required'],
         ];
     }

@@ -13,8 +13,8 @@ class RecruitmentController extends Controller
         return response()->json(RecruitmentResource::collection(Recruitments::all()));
     }
 
-    public function show(Recruitments $recruitment): JsonResponse {
-        return response()->json(new RecruitmentResource($recruitment));
+    public function show($id): JsonResponse {
+        return response()->json(Recruitments::find($id));
     }
 
     public function store(StoreRecruitmentRequest $request): JsonResponse {
@@ -22,13 +22,13 @@ class RecruitmentController extends Controller
         return response()->json("Recruitment Created");
     }
 
-    public function update(StoreRecruitmentRequest $request, Recruitments $recruitment): JsonResponse {
-        $recruitment->update($request->validated());
+    public function update(StoreRecruitmentRequest $request, $id): JsonResponse {
+        Recruitments::find($id)->update($request->validated());
         return response()->json("Recruitment Updated");
     }
 
-    public function destroy(Recruitments $recruitment): JsonResponse {
-        $recruitment->delete();
+    public function destroy($id): JsonResponse {
+        Recruitments::find($id)->delete();
         return response()->json("Recruitment deleted");
     }
 }

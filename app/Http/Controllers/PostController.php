@@ -21,8 +21,9 @@ class PostController extends Controller
         return response()->json(['data'=>$post]);
     }
 
-    public function show(Post $post): JsonResponse {
-        return response()->json(new PostResource($post));
+    public function show($id): JsonResponse {
+        $post = Post::find($id);
+        return response()->json($post);
     }
 
     public function store(StorePostRequest $request): JsonResponse {
@@ -30,13 +31,13 @@ class PostController extends Controller
         return response()->json("Post Created");
     }
 
-    public function update(StorePostRequest $request, Post $post): JsonResponse {
-        $post->update($request->validated());
+    public function update(StorePostRequest $request, $id): JsonResponse {
+        Post::find($id)->update($request->validated());
         return response()->json("Post Updated");
     }
 
-    public function destroy(Post $post): JsonResponse {
-        $post->delete();
+    public function destroy($id): JsonResponse {
+        Post::find($id)->delete();
         return response()->json("Post deleted");
     }
 }
