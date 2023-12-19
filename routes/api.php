@@ -31,6 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/register', [AuthController::class, 'register'])->name('api.register');
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
-Route::apiResource('/recruitments', RecruitmentController::class);
-Route::apiResource('/posts', PostController::class);
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/recruitments', [RecruitmentController::class, 'index']);
 Route::get('post/test/{$id}', [PostController::class, 'test']);

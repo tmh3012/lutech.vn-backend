@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -16,19 +19,22 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::query()->pluck('id')->toArray();
         return [
-            'user_id' => 1,
-            'job_title' => fake()->sentence(4, true),
-            "job_description" => fake()->paragraph(),
-            "job_requirement" => fake()->paragraph(),
-            "job_benefit" => fake()->paragraph(),
-            'min_salary' => fake()->numberBetween(100,5000),
-            'max_salary' => fake()->numberBetween(100,5000),
+            'user_id' => Arr::random($user),
+            'job_title' => fake()->words(5, true),
+            "job_description" => fake()->text(),
+            "job_requirement" => fake()->text(),
+            "job_benefit" => fake()->text(),
+            'min_salary' => fake()->randomFloat(3, true),
+            'max_salary' => fake()->randomFloat(4, true),
             'start_date' => fake()->date('Y-m-d'),
             'end_date' => fake()->date('Y-m-d'),
-            "number_applicants" => fake()->numberBetween(1, 1000),
+            "number_applicants" => fake()->biasedNumberBetween(1, 10),
             "slug" => fake()->slug,
             "site" => fake()->boolean(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

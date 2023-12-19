@@ -20,19 +20,11 @@ class DatabaseSeeder extends Seeder
             Post::factory()->create();
             Recruitments::factory()->create();
         }
-
-
+        
 //        $this->call([
 //            UserSeeder::class,
 //            PostSeeder::class,
-//            RecruitmentSeeder::class,
+////            RecruitmentsSeeder::class,
 //        ]);
-
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }
