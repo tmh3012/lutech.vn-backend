@@ -15,6 +15,7 @@ class Post extends Model
 
     protected $casts = [
         'start_date' => 'date:Y-m-d',
+        'end_date' => 'date:Y-m-d',
     ];
 
     protected $dateFormat = "Y-m-d";
@@ -41,11 +42,18 @@ class Post extends Model
         );
     }
 
+    protected function endDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Carbon::parse($value)->format('d-m-Y'),
+        );
+    }
+
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'job_title'
             ]
         ];
     }

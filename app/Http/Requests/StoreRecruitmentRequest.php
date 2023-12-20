@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class StoreRecruitmentRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class StoreRecruitmentRequest extends FormRequest
             "phone" => ['nullable'],
             "email" => ['nullable'],
             "address" => ['nullable'],
-            "file" => ['nullable'],
+            "file" => ['nullable', File::types(['mp3', 'wav'])->max(12 * 1024)],
         ];
     }
 }

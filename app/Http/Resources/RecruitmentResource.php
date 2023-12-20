@@ -22,6 +22,7 @@ class RecruitmentResource extends JsonResource
             "phone" => $this->phone,
             "email" => $this->email,
             "file" => $this->file,
+            "post_title" => $this->post->job_title,
         ];
     }
 }

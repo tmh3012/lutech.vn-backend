@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Recruitments extends Model
 {
@@ -18,4 +19,9 @@ class Recruitments extends Model
         "address",
         "file",
     ];
+
+    protected function post(): BelongsTo
+    {
+        return $this->belongsTo(Post::class);
+    }
 }

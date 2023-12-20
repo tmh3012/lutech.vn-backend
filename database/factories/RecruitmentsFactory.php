@@ -26,6 +26,7 @@ class RecruitmentsFactory extends Factory
             'name' => fake()->name(),
             "phone" => fake()->phoneNumber(),
             "email" => fake()->email(),
+            "address" => fake()->address(),
             "file" => fake()->word(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

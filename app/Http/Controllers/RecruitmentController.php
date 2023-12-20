@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRecruitmentRequest;
 use App\Http\Resources\RecruitmentResource;
+use App\Traits\Upload;
 use Illuminate\Http\JsonResponse;
 use App\Models\Recruitments;
 
 class RecruitmentController extends Controller
 {
+    use Upload;
+
     public function index(): JsonResponse {
         return response()->json(RecruitmentResource::collection(Recruitments::all()));
     }
