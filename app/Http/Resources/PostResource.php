@@ -18,6 +18,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'job_title' => $this->job_title,
+            "job_position" => $this->job_position,
             "job_description" => $this->job_description,
             "job_requirement" => $this->job_requirement,
             "job_benefit" => $this->job_benefit,

@@ -23,6 +23,7 @@ class Post extends Model
     protected $fillable = [
         'user_id',
         'job_title',
+        'job_position',
         "job_description",
         "job_requirement",
         "job_benefit",
@@ -38,14 +39,14 @@ class Post extends Model
     protected function startDate(): Attribute
     {
         return Attribute::make(
-          get: fn($value) => Carbon::parse($value)->format('d-m-Y'),
+          get: fn($value) => Carbon::parse($value)->format('d/m/Y'),
         );
     }
 
     protected function endDate(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::parse($value)->format('d-m-Y'),
+            get: fn($value) => Carbon::parse($value)->format('d/m/Y'),
         );
     }
 

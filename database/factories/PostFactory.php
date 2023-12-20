@@ -24,9 +24,10 @@ class PostFactory extends Factory
         $user = User::query()->pluck('id')->toArray();
         return [
             'user_id' => Arr::random($user),
-            'job_title' => fake()->words(5, true),
-            "job_description" => fake()->text(),
+            'job_title' => fake()->words(4, true),
+            "job_position" => fake()->words(2, true),
             "job_requirement" => fake()->text(),
+            "job_description" => fake()->text(),
             "job_benefit" => fake()->text(),
             'min_salary' => fake()->randomFloat(3, true),
             'max_salary' => fake()->randomFloat(4, true),
