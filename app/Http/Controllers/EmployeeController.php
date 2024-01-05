@@ -22,14 +22,15 @@ class EmployeeController extends Controller
 
     public function index (Request $request): JsonResponse
     {
+        $limit = $request->get('limit') ?? 10;
         $query = $this->model
             ->with('position:id,value')
             ->latest()
-            ->paginate()
+            ->paginate($limit)
             ->appends($request->all());
 
         $arr['employees'] = $query->getCollection();
-        $arr['pagination'] = $query->linkCollection();
+        $arr['lastPage'] = $query->lastPage();
 
         return response()->json($arr);
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,14 @@ Route::group([
  ], function () {
    Route::get('/', [PostController::class, 'index'])->name('get.all');
    Route::get('/{id}', [PostController::class, 'getPostById'])->name('get.by_id');
+});
+
+Route::group([
+    'as' => '.position',
+    'prefix' => 'position',
+ ], function () {
+   Route::get('/', [PositionController::class, 'index'])->name('get.all');
+//   Route::get('/{id}', [PostController::class, 'getPostById'])->name('get.by_id');
 });
 
 Route::post('/register', [AuthController::class, 'register'])->name('api.register');
