@@ -23,12 +23,25 @@ class EmployeeController extends Controller
     public function index (Request $request): JsonResponse
     {
         $limit = $request->get('limit') ?? 10;
+        $name = $request->get('name');
+        $position = $request->get('position_value');
+
+
         $query = $this->model
             ->with('position:id,value')
+            ->when(isset($name), function ($q) use ($name) {
+                return $q->where('name', 'like', "%$name%");
+            })
+            ->when(isset($position), function ($q) use ($position) {
+                return $q->whereHas('position', function ($query) use ($position) {
+                    return $query->whereRaw("id in ($position)");
+                });
+            })
             ->latest()
             ->paginate($limit)
             ->appends($request->all());
 
+        $arr['request'] = $request->all();
         $arr['employees'] = $query->getCollection();
         $arr['lastPage'] = $query->lastPage();
 
